@@ -1,3 +1,4 @@
+import Navbar from "@/components/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 
 export default function Template({ children }: { children: React.ReactNode }) {
@@ -8,6 +9,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
       enableSystem
       disableTransitionOnChange
     >
+      <Navbar></Navbar>
       {children}
     </ThemeProvider>
   );
