@@ -2,7 +2,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { useTheme } from "next-themes";
 
 export const BackgroundBeams = React.memo(
   ({ className }: { className?: string }) => {
@@ -59,7 +58,6 @@ export const BackgroundBeams = React.memo(
       "M-37 -581C-37 -581 31 -176 495 -49C959 78 1027 483 1027 483",
     ];
 
-    const { theme } = useTheme();
     return (
       <div
         className={cn(
@@ -87,7 +85,7 @@ export const BackgroundBeams = React.memo(
               key={`path-` + index}
               d={path}
               stroke={`url(#linearGradient-${index})`}
-              strokeOpacity={theme == "light" ? "0.1" : "0.4"}
+              strokeOpacity="0.4"
               strokeWidth="0.5"
             ></motion.path>
           ))}

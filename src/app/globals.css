@@ -50,7 +50,7 @@
 }
 
 .tooltip-container::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -10px; /* Adjust this value based on the size of the triangle */
   left: 30px;
@@ -58,7 +58,7 @@
   width: 0;
   height: 0;
 
-  @apply border-x-[10px] border-x-transparent border-b-[10px] dark:border-b-neutral-600 border-b-neutral-400
+  @apply border-x-[10px] border-x-transparent border-b-[10px] dark:border-b-neutral-600 border-b-neutral-400;
 }
 
 @layer base {
@@ -67,5 +67,49 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Define keyframes for text animations */
+@keyframes textAnimation {
+  0%,
+  33% {
+    opacity: 0; display: none;
+  }
+  33.333%,
+  100% {
+    opacity: 0; display: none;
+  }
+  5%,
+  32% {
+    opacity: 1; display: block;
+  }
+}
+
+@keyframes textAnimationDelay1 {
+  0%,
+  33.333% {
+    opacity: 0; display: none;
+  }
+  34.333%,
+  61.666% {
+    opacity: 1; display: block;
+  }
+
+  66.666%,
+  100% {
+    opacity: 0;display: none;
+  }
+}
+
+@keyframes textAnimationDelay2 {
+  0%,
+  66.666%,
+  100% {
+    opacity: 0; display: none;
+  }
+  71.666%,
+  95% {
+    opacity: 1; display: block;
   }
 }

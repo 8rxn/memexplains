@@ -5,10 +5,11 @@ import { Highlight } from "@/components/hero-highlight";
 import Image from "next/image";
 import { BackgroundBeams } from "./background-beams";
 import { Button } from "./ui/button";
+import PromptInput from "./prompt-input";
 
 const Hero = () => {
   return (
-    <div className="flex flex-col min-h-screen items-center justify-center">
+    <div className="flex flex-col min-h-screen items-center justify-center py-24">
       <motion.div
         initial={{
           opacity: 0,
@@ -58,9 +59,7 @@ const Hero = () => {
           </span>{" "}
           as memes using GPT-4 and Dalle3
         </p>
-
-
-        <Button className="mt-8">Start Creating</Button>
+        <PromptInput/>
       </motion.div>
 
       <BackgroundBeams />
@@ -78,7 +77,7 @@ const TooltipCard = ({
   children: React.ReactNode;
 }) => {
   return (
-    <span className="bg-neutral-50 dark:bg-neutral-900 border dark:border-neutral-800 border-neutral-300  rounded-lg min-h-fit min-w-48 pb-2  peer-hover:scale-y-100 hover:scale-y-100 scale-y-0 transition-transform ease-in-out  absolute top-[120%] sm:left-0 right-0 tooltip-container">
+    <span className="bg-neutral-50 dark:bg-neutral-900 border z-20 translate-y-[-50%] dark:border-neutral-800 border-neutral-300  rounded-lg min-h-fit min-w-48 pb-2  peer-hover:scale-y-100 hover:scale-y-100  hover:translate-y-0 peer-hover:translate-y-0  scale-y-0 transition-transform ease-in-out  absolute top-[120%] sm:left-0 right-0 tooltip-container">
       <img alt="Meme" className="rounded-md" src={src}></img>
       <span className="text-xs mt-4 px-2 font-mono">{children}</span>
     </span>
