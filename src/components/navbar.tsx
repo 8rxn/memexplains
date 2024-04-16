@@ -18,7 +18,12 @@ const Navbar = async (props: Props) => {
           <ModeToggle></ModeToggle>
           <div>
             {session ? (
-              <ProfileButton image={session.user?.image || ""} />
+              <ProfileButton
+                //@ts-ignore
+                credits={session.user?.credits || ""}
+                image={session.user?.image || ""}
+                id = {session.user?.id || ""}
+              />
             ) : (
               <SignIn />
             )}
