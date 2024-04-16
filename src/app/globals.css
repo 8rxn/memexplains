@@ -81,7 +81,7 @@
     opacity: 0; display: none;
   }
   5%,
-  32% {
+  34% {
     opacity: 1; display: block;
   }
 }
@@ -91,7 +91,7 @@
   33.333% {
     opacity: 0; display: none;
   }
-  34.333%,
+  36.333%,
   61.666% {
     opacity: 1; display: block;
   }

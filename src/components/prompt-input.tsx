@@ -42,14 +42,17 @@ const PromptInput = () => {
       body: JSON.stringify({ text: prompt }),
     };
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_GENERATION_ENDPOINT}`, options);
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_GENERATION_ENDPOINT}`,
+      options
+    );
 
     if (res.status === 200) {
       setPrompt("");
-    }
 
-    const genMeme = await res.json();
-    setMeme(genMeme);
+      const genMeme = await res.json();
+      setMeme(genMeme);
+    }
 
     setLoading(false);
   };
@@ -83,7 +86,7 @@ const PromptInput = () => {
         </Button>
       </div>
       {loading && (
-        <div className="relative text-xs w-fit mx-auto lg:text-sm mt-2 ">
+        <div className="relative text-xs w-fit mx-auto lg:text-sm my-2 ">
           <p className="animate-[textAnimation_15s_infinite]">
             Cooking Your Meme 🍳
           </p>
@@ -101,14 +104,9 @@ const PromptInput = () => {
             alt="Meme"
             className="rounded-md "
             width={256}
-            src={
-              meme?.image ||
-              "https://memes-cdn.rajaryan.work/uploads/17-astronaut-lost in space.webp"
-            }
+            src={meme?.image}
           ></img>
-          <span className="text-xs mt-4 px-2 font-mono">
-            {meme?.prompt || "An astronaut lost in space"}
-          </span>
+          <span className="text-xs mt-4 px-2 font-mono">{meme?.prompt}</span>
         </div>
       )}
     </div>

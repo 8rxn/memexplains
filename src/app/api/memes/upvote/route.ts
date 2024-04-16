@@ -13,14 +13,14 @@ export async function POST(request: Request) {
 
   const memeOriginal = await prisma.memes.findFirst({
     where: { id: id },
-    include: { Upvotes: { select: { userId } } },
+    include: { Upvotes: { select: { userId: true } } },
   });
 
   let meme;
   try {
     if (add) {
-      if (memeOriginal?.Upvotes.includes(userId)) {
-        return Response.json({ error: "Can't upvote, already added" });
+      if (memeOriginal?.Upvotes.find((upvote) => upvote.userId === userId)) {
+        return Response.json({ error: "Already upvoted" }, { status: 400 });
       }
       meme = await prisma.upvotes.create({
         data: {
@@ -29,8 +29,8 @@ export async function POST(request: Request) {
         },
       });
     } else {
-      if (!memeOriginal?.Upvotes.includes(userId)) {
-        return Response.json({ error: "Can't remove, not voted yet" });
+      if (!memeOriginal?.Upvotes.find((upvote) => upvote.userId === userId)) {
+        return Response.json({ error: "Not upvoted" }, { status: 400 });
       }
       meme = await prisma.upvotes.deleteMany({
         where: {

@@ -57,8 +57,16 @@ const MemesContainer = (props: Props) => {
         </>
       )}
       {!loading &&
-        memes.map((meme: { id: string; image: string; prompt: string }) => (
-          <MemeCard upvote={upvote} key={meme.id} meme={meme}></MemeCard>
+        memes.map((meme: Meme) => (
+          <>
+            
+            <MemeCard
+              upvote={upvote}
+              key={meme.id}
+              meme={meme}
+              upvotable={!meme.upvoted.includes(`${session?.user?.id}`)}
+            ></MemeCard>
+          </>
         ))}
     </div>
   );
