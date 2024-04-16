@@ -42,7 +42,7 @@ const PromptInput = () => {
       body: JSON.stringify({ text: prompt }),
     };
 
-    const res = await fetch(`${process.env.GENERATION_ENDPOINT}`, options);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_GENERATION_ENDPOINT}`, options);
 
     if (res.status === 200) {
       setPrompt("");
