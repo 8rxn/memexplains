@@ -8,9 +8,7 @@ export const runtime = "edge";
 
 export async function GET(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
-  const query = searchParams.get("id") || "1";
-
-  const meme = await prisma.memes.findFirst({ where: { id: parseInt(query) } });
+  const id = searchParams.get("id");
 
   return new ImageResponse(
     (
@@ -25,10 +23,22 @@ export async function GET(req: NextRequest) {
           textAlign: "center",
           justifyContent: "between",
           alignItems: "center",
+          display: "flex",
         }}
       >
-        <img src={meme?.image} />
-        <p>{meme?.prompt}</p>
+        <div>
+          <img
+            src={`https://https://memes-cdn.rajaryan.work/uploads/${id}.webp`}
+            style={{
+              width: "600px",
+              height: "600px",
+              borderRadius: "10px",
+              marginBottom: "10px",
+              objectFit: "contain",
+            }}
+          />
+        </div>
+        Imagine Memes. MemeExplains
       </div>
     ),
     {
