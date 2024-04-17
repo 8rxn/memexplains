@@ -1,5 +1,9 @@
+import { auth } from "@/auth";
+import { Button } from "@/components/ui/button";
+import UpvoteButton from "@/components/upvote-button";
 import { prisma } from "@/lib/db";
 import { ResolvingMetadata, Metadata } from "next";
+import Link from "next/link";
 import React from "react";
 
 type Props = {
@@ -34,6 +38,7 @@ export async function generateMetadata(
 
 const Page = async (props: Props) => {
   const id = props.searchParams.id;
+  const session = await auth();
 
   const meme = await prisma.memes.findUnique({
     where: {
@@ -45,6 +50,16 @@ const Page = async (props: Props) => {
           name: true,
         },
       },
+      _count: {
+        select: {
+          Upvotes: true,
+        },
+      },
+      Upvotes: {
+        include: {
+          user: true,
+        },
+      },
     },
   });
 
@@ -53,7 +68,7 @@ const Page = async (props: Props) => {
   }
 
   return (
-    <div className="bg-neutral-200 dark:bg-neutral-800 rounded-lg p-8 flex flex-col sm:flex-row justify-between gap-8 max-w-6xl mx-16 items-center">
+    <div className="bg-neutral-200 dark:bg-neutral-800 relative rounded-lg p-8 flex flex-col sm:flex-row justify-between gap-8 max-w-6xl mx-16 items-center">
       <img
         src={meme.image}
         width={300}
@@ -67,6 +82,30 @@ const Page = async (props: Props) => {
         <p className="text-neutral-600 dark:text-neutral-400">
           By {meme.user.name}
         </p>
+      </div>
+
+      {session?.user?.id && (
+        <UpvoteButton
+          meme={{ upvotes: meme._count.Upvotes, id: meme.id.toString() }}
+          upvotable={
+            meme.Upvotes.find((upvote) => upvote.userId === session?.user?.id)
+              ? false
+              : true
+          }
+        />
+      )}
+      <div>
+        <Link
+          href={
+            "https://twitter.com/intent/tweet?text=Loved%20this%20meme%20by%20memexplains%0A%0ACheckout%20https%3A%2F%2Fmemexplains.vercel.app%2Fmeme%3Fid%3D" +
+            meme.id
+          }
+          target="_blank"
+        >
+          <Button className="absolute top-2 right-2" variant={"link"}>
+            Share on {`𝕏`}
+          </Button>
+        </Link>
       </div>
     </div>
   );
