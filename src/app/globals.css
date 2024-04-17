@@ -71,45 +71,18 @@
 }
 
 /* Define keyframes for text animations */
+
 @keyframes textAnimation {
-  0%,
-  33% {
-    opacity: 0; display: none;
-  }
-  33.333%,
-  100% {
-    opacity: 0; display: none;
-  }
-  5%,
-  34% {
-    opacity: 1; display: block;
-  }
+  0%, 100% { opacity: 0; }
+  5%, 30% { opacity: 1; }
 }
 
 @keyframes textAnimationDelay1 {
-  0%,
-  33.333% {
-    opacity: 0; display: none;
-  }
-  36.333%,
-  61.666% {
-    opacity: 1; display: block;
-  }
-
-  66.666%,
-  100% {
-    opacity: 0;display: none;
-  }
+  0%, 33.333%, 100% { opacity: 0; }
+  35%, 65% { opacity: 1; }
 }
 
 @keyframes textAnimationDelay2 {
-  0%,
-  66.666%,
-  100% {
-    opacity: 0; display: none;
-  }
-  71.666%,
-  95% {
-    opacity: 1; display: block;
-  }
+  0%, 66.666%, 100% { opacity: 0; }
+  70%, 95% { opacity: 1; }
 }

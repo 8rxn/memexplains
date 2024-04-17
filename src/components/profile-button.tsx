@@ -10,33 +10,18 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import { signOut } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { CreditsContext } from "./credits-provider";
 
 const ProfileButton = ({
   image,
-  credits,
   id,
 }: {
   image: string;
   credits: string;
   id: string;
 }) => {
-  const [creditCount, setCreditCount] = useState(credits);
-
-  const fetchCredits = async () => {
-    const res = await fetch("/api/user/credits", {
-      method: "POST",
-      body: JSON.stringify({ id: id }),
-    });
-
-    const data = await res.json();
-
-    setCreditCount(data.credits);
-  };
-
-  useEffect(() => {
-    fetchCredits();
-  }, []);
+  const { creditCount } = useContext(CreditsContext);
 
   return (
     <DropdownMenu>
@@ -50,7 +35,7 @@ const ProfileButton = ({
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem className="font-bold" disabled>
-          {credits} Credits ✨
+          {creditCount} Credits ✨
         </DropdownMenuItem>
         <DropdownMenuItem>Get More</DropdownMenuItem>
 

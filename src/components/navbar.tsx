@@ -25,7 +25,7 @@ const Navbar = async (props: Props) => {
                 id = {session.user?.id || ""}
               />
             ) : (
-              <SignIn />
+              <SignIn>Join in</SignIn>
             )}
           </div>
         </div>

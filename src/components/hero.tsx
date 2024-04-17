@@ -9,7 +9,7 @@ import PromptInput from "./prompt-input";
 
 const Hero = () => {
   return (
-    <div className="flex flex-col min-h-screen items-center justify-center py-24">
+    <>
       <motion.div
         initial={{
           opacity: 0,
@@ -23,7 +23,7 @@ const Hero = () => {
           duration: 0.5,
           ease: [0.4, 0.0, 0.2, 1],
         }}
-        className="text-2xl px-4 md:text-4xl lg:text-5xl font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto "
+        className="text-2xl px-4 md:text-4xl lg:text-5xl font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto mb-24"
       >
         <h1 className="text-4xl md:text-6xl lg:text-7xl tracking-widest">
           Meme Explains
@@ -38,32 +38,31 @@ const Hero = () => {
           Explain{" "}
           <span className="group dark:bg-red-500/10 bg-red-500/30 p-2 rounded-lg hover:bg-red-500/50 dark:hover:bg-red-500/50 transition-colors ease-in cursor-pointer relative ">
             <span className="peer">Situations</span>
-            <TooltipCard src="https://imageio.forbes.com/specials-images/imageserve/5e740f3207adf00006db9d14/Coronavirus-meme-featuring-Kanye-West--created-by-meme-account--MasiPopal/960x0.png?format=png&width=960">
-              Something
+            <TooltipCard src="https://memes-cdn.rajaryan.work/uploads/24-RCB-fan-expecting-RCB-to-win.webp">
+              RCB fan expecting RCB to win
             </TooltipCard>
           </span>
           ,{" "}
           <span className="dark:bg-yellow-500/10 bg-yellow-500/30 p-2 rounded-lg hover:bg-yellow-500/50 dark:hover:bg-yellow-500/50 transition-colors ease-in cursor-pointer group relative ">
             <span className="peer">Events</span>
-            <TooltipCard src="https://imageio.forbes.com/specials-images/imageserve/5e740f3207adf00006db9d14/Coronavirus-meme-featuring-Kanye-West--created-by-meme-account--MasiPopal/960x0.png?format=png&width=960">
-              Something Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Harum, ducimus.
+            <TooltipCard src="https://memes-cdn.rajaryan.work/uploads/23-blockchain-developer-buying-the-dip.webp">
+              Blockchain developer buying the dip
             </TooltipCard>
           </span>
           ,{" "}
           <span className="dark:bg-green-500/10 bg-green-500/30 p-2 rounded-lg hover:bg-green-500/50 dark:hover:bg-green-500/50 max-h-fit transition-colors ease-in cursor-pointer relative group">
             <span className="peer break-keep">Historical Figures</span>
-            <TooltipCard src="https://imageio.forbes.com/specials-images/imageserve/5e740f3207adf00006db9d14/Coronavirus-meme-featuring-Kanye-West--created-by-meme-account--MasiPopal/960x0.png?format=png&width=960">
-              Something
+            <TooltipCard src="https://memes-cdn.rajaryan.work/uploads/40-the-ugly-apple-airpods-max.webp">
+            The ugly apple airpods max
             </TooltipCard>
           </span>{" "}
           as memes using GPT-4 and Dalle3
         </p>
-        <PromptInput/>
+        <PromptInput />
       </motion.div>
 
       <BackgroundBeams />
-    </div>
+    </>
   );
 };
 

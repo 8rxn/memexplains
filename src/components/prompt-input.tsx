@@ -1,29 +1,38 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useSession } from "next-auth/react";
 
 import { ArrowUpRight, Loader2 } from "lucide-react";
 
+import { useRouter } from "next/navigation";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { CreditsContext } from "./credits-provider";
 
 const PromptInput = () => {
   const [prompt, setPrompt] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const { creditCount, setCreditCount } = useContext(CreditsContext);
 
   const { status, data } = useSession();
 
+  const router = useRouter();
   const [meme, setMeme] = useState<any>();
 
   const createMeme = async () => {
+    if (status !== "authenticated") {
+      router.push("/auth/signin");
+      return;
+    }
     if (!prompt) {
       return;
     }
 
-    if (status !== "authenticated") {
+    if (creditCount < 1) {
       return;
     }
+
     //@ts-ignore
     if (!data.user?.apiKey) {
       return;
@@ -49,7 +58,7 @@ const PromptInput = () => {
 
     if (res.status === 200) {
       setPrompt("");
-
+      setCreditCount(creditCount - 1);
       const genMeme = await res.json();
       setMeme(genMeme);
     }
@@ -66,6 +75,11 @@ const PromptInput = () => {
           className="px-4 bg-transparent py-2 focus:outline-none transition-colors ease-in disabled:cursor-not-allowed disabled:opacity-50"
           value={prompt}
           disabled={loading}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              createMeme();
+            }
+          }}
           onChange={(e) => setPrompt(e.target.value)}
         />
         <Button
