@@ -15,7 +15,7 @@ const Navbar = async (props: Props) => {
     <nav className=" top-0 font-mono absolute w-full ">
       <div className="max-w-7xl mx-auto p-8 flex justify-between">
         <Link href="/#">
-          <p>mexplains</p>
+          <p>MemeXplains</p>
         </Link>
         <div className="flex gap-2">
           <ModeToggle></ModeToggle>

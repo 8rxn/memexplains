@@ -180,7 +180,7 @@ const PromptInput = () => {
           <DialogHeader>
             <DialogTitle>You are Out of Credits! </DialogTitle>
             <DialogDescription>
-              To continue using memexplains, purchase more credits.
+              To continue using MemeXplains, purchase more credits.
               <br />
               This will allow me to keep building apps like this
             </DialogDescription>
