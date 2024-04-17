@@ -14,7 +14,8 @@ export async function GET(req: NextRequest) {
 
   return new ImageResponse(
     (
-      <div style={{
+      <div
+        style={{
           fontSize: 40,
           color: "black",
           background: "white",
@@ -24,9 +25,10 @@ export async function GET(req: NextRequest) {
           textAlign: "center",
           justifyContent: "between",
           alignItems: "center",
-        }}>
-        <img src={meme.image} />
-        <p>{meme.prompt}</p>
+        }}
+      >
+        <img src={meme?.image} />
+        <p>{meme?.prompt}</p>
       </div>
     ),
     {
