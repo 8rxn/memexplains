@@ -26,18 +26,16 @@ export async function GET(req: NextRequest) {
           display: "flex",
         }}
       >
-        <div>
-          <img
-            src={`https://https://memes-cdn.rajaryan.work/uploads/${id}.webp`}
-            style={{
-              width: "600px",
-              height: "600px",
-              borderRadius: "10px",
-              marginBottom: "10px",
-              objectFit: "contain",
-            }}
-          />
-        </div>
+        <div
+          style={{
+            width: "600px",
+            height: "600px",
+            borderRadius: "10px",
+            marginBottom: "10px",
+            objectFit: "contain",
+            background: `url(https://memes-cdn.rajaryan.work/uploads/${id}.webp)`,
+          }}
+        ></div>
         Imagine Memes. MemeExplains
       </div>
     ),
