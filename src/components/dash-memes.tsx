@@ -11,10 +11,13 @@ const DashMemes = () => {
   const { data: session } = useSession();
 
   const fetchMemes = async () => {
+    if (!session?.user?.id) {
+      return;
+    }
     const res = await fetch(`/api/user/memes?id=${session?.user.id}`);
     const data = await res.json();
     setMemes(data.memes);
-    setLoading(false)
+    setLoading(false);
   };
 
   const upvote = async (data: { id: string; add: boolean }) => {

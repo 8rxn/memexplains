@@ -49,7 +49,7 @@ const ProfileButton = ({
           <DropdownMenuItem className="font-bold" disabled>
             {creditCount} Credits ✨
           </DropdownMenuItem>
-          <DialogTrigger className="w-full">
+          <DialogTrigger className="w-full" asChild>
             <DropdownMenuItem>Get More</DropdownMenuItem>
           </DialogTrigger>
 

@@ -9,20 +9,21 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String     @id @default(cuid())
   name          String?
-  email         String    @unique
+  email         String     @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
-  credits       Int       @default(5)
+  credits       Int        @default(5)
   sessions      Session[]
-  apiKey        String?   @unique @default(uuid())
+  apiKey        String?    @unique @default(uuid())
   Usage         Usage[]
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
   Memes         Memes[]
   Upvotes       Upvotes[]
+  Payments      Payments[]
 }
 
 model Usage {
@@ -90,6 +91,16 @@ model Upvotes {
   user      User     @relation(fields: [userId], references: [id])
   memeId    Int
   meme      Memes    @relation(fields: [memeId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Payments {
+  id        Int      @id @default(autoincrement())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  amount    Int
+  completed Boolean
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

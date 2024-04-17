@@ -4,14 +4,16 @@ import type { Stripe } from "stripe";
 
 import { headers } from "next/headers";
 
+
+
 import { stripe } from "@/lib/stripe";
 
-export async function createCheckoutSession(
-  data: FormData,
-): Promise<{ client_secret: string | null; url: string | null }> {
-  const ui_mode = data.get(
-    "uiMode",
-  ) as Stripe.Checkout.SessionCreateParams.UiMode;
+export async function createCheckoutSession(data: {
+  amount: string;
+}): Promise<{ client_secret: string | null; url: string | null }> {
+  const ui_mode = "hosted" as Stripe.Checkout.SessionCreateParams.UiMode;
+
+  console.log("data", data.amount);
 
   const origin: string = headers().get("origin") as string;
 
@@ -23,20 +25,17 @@ export async function createCheckoutSession(
         {
           quantity: 1,
           price_data: {
-            currency: "usd",
+            currency: "inr",
             product_data: {
-              name: "Custom amount donation",
+              name: "Custom Amount Credits",
             },
-            unit_amount: Number(data.get("customDonation")) * 100,
+            unit_amount: convertUSDtoINR(Number(data.amount) * 100),
           },
         },
       ],
       ...(ui_mode === "hosted" && {
-        success_url: `${origin}/donate-with-checkout/result?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${origin}/donate-with-checkout`,
-      }),
-      ...(ui_mode === "embedded" && {
-        return_url: `${origin}/donate-with-embedded-checkout/result?session_id={CHECKOUT_SESSION_ID}`,
+        success_url: `${origin}/dashboard/result?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${origin}/dashboard`,
       }),
       ui_mode,
     });
@@ -47,18 +46,6 @@ export async function createCheckoutSession(
   };
 }
 
-// export async function createPaymentIntent(
-//   data: FormData,
-// ): Promise<{ client_secret: string }> {
-//   const paymentIntent: Stripe.PaymentIntent =
-//     await stripe.paymentIntents.create({
-//       amount: formatAmountForStripe(
-//         Number(data.get("customDonation") as string),
-//         CURRENCY,
-//       ),
-//       automatic_payment_methods: { enabled: true },
-//       currency: CURRENCY,
-//     });
-
-//   return { client_secret: paymentIntent.client_secret as string };
-// }
+function convertUSDtoINR(amount: number): number {
+  return amount * 87.5;
+}

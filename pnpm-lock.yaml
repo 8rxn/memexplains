@@ -47,6 +47,9 @@ dependencies:
   lucide-react:
     specifier: ^0.368.0
     version: 0.368.0(react@18.2.0)
+  micro-cors:
+    specifier: ^0.1.1
+    version: 0.1.1
   mini-svg-data-uri:
     specifier: ^1.4.4
     version: 1.4.4
@@ -2637,6 +2640,11 @@ packages:
   /merge2@1.4.1:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
     engines: {node: '>= 8'}
+
+  /micro-cors@0.1.1:
+    resolution: {integrity: sha512-6WqIahA5sbQR1Gjexp1VuWGFDKbZZleJb/gy1khNGk18a6iN1FdTcr3Q8twaxkV5H94RjxIBjirYbWCehpMBFw==}
+    engines: {node: '>=6'}
+    dev: false
 
   /micromatch@4.0.5:
     resolution: {integrity: sha512-DMy+ERcEW2q8Z2Po+WNXuw3c5YaUSFjAO5GsJqfEl7UjvtIuFKO6ZrKvcItdy98dwFI2N1tg3zNIdKaQT+aNdA==}

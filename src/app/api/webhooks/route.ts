@@ -3,12 +3,15 @@ import type { Stripe } from "stripe";
 import { NextResponse } from "next/server";
 
 import { stripe } from "@/lib/stripe";
+import { prisma } from "@/lib/db";
 
 export async function POST(req: Request) {
   let event: Stripe.Event;
 
+  
   try {
     event = stripe.webhooks.constructEvent(
+      
       await (await req.blob()).text(),
       req.headers.get("stripe-signature") as string,
       process.env.STRIPE_WEBHOOK_SECRET as string
