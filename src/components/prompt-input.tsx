@@ -97,7 +97,7 @@ const PromptInput = () => {
           />
 
           {creditCount < 1 && (
-            <DialogTrigger id="prompt-submit">
+            <DialogTrigger id="prompt-submit" asChild>
               <Button
                 className="absolute right-2 bottom-2 w-9 h-6 "
                 type="submit"

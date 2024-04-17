@@ -55,6 +55,7 @@ const Credits = (props: Props) => {
               <Input
                 id="amount"
                 min={1}
+                max={3}
                 name="amount"
                 type="number"
                 step={0.5}
@@ -80,7 +81,7 @@ const Credits = (props: Props) => {
               <Input
                 id="amount"
                 disabled
-                value={`${Number(amount * 14)}`}
+                value={`${Number(amount * 2)}`}
                 className="col-span-4"
               />
             </div>
