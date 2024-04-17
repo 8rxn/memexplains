@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import MemeCard from "./meme";
 import { Meme } from "../../types/meme";
 import CardSkeleton from "./card-skeleton";
@@ -11,16 +11,27 @@ type Props = {};
 const MemesContainer = (props: Props) => {
   const [memes, setMemes] = useState<Meme[]>([]);
   const [loading, setLoading] = useState(true);
+  const [next, setNext] = useState(0);
   const { data: session } = useSession();
 
-  const fetchMemes = async () => {
+  const ref = useRef(null);
+
+  const fetchMemes = async ({ next = 0 }: { next?: number }) => {
     setLoading(true);
-    const res = await fetch("/api/memes");
+    const res = await fetch("/api/memes?next=" + next);
 
     const fetchedMemes = await res.json();
 
-    setMemes(fetchedMemes);
+    if (memes.length < 1) {
+      setMemes(fetchedMemes.memes);
+    } else {
+      setMemes([...memes, ...fetchedMemes.memes]);
+    }
     setLoading(false);
+    if (!fetchedMemes.more) {
+      setNext(-1);
+    }
+    console.log({ memes });
   };
 
   const upvote = async (data: { id: string; add: boolean }) => {
@@ -40,18 +51,68 @@ const MemesContainer = (props: Props) => {
     return Promise.reject();
   };
 
+  const debounce = (func: () => void, delay: number) => {
+    let inDebounce: NodeJS.Timeout;
+    return function () {
+      //@ts-ignore
+      const context = this;
+      const args = arguments;
+      clearTimeout(inDebounce);
+      //@ts-ignore
+      inDebounce = setTimeout(() => func.apply(context, args), delay);
+    };
+  };
+
+  const handleScroll = debounce(() => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop >=
+        document.documentElement.offsetHeight - 100 &&
+      !loading
+    ) {
+      if (next < 0) {
+        return;
+      }
+      setNext((prev) => prev + 1);
+    }
+  }, 100);
+
   useEffect(() => {
-    fetchMemes();
+    fetchMemes({});
   }, []);
 
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [handleScroll, loading]);
+
+  useEffect(() => {
+    if (next > 0) {
+      fetchMemes({ next: next });
+    }
+  }, [next]);
+
   return (
-    <div className="grid grid-flow-row grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 px-2">
+    <div
+      ref={ref}
+      className="grid grid-flow-row grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 px-2"
+    >
       <div className="col-span-full px-6 my-2">
         <h2 className="font-semibold text-sm sm:text-xl lg:text-2xl ">
           Top AI Memes from the Community{" "}
         </h2>
       </div>
 
+      {memes &&
+        memes.map((meme: Meme) => (
+          <>
+            <MemeCard
+              upvote={upvote}
+              key={meme.id}
+              meme={meme}
+              upvotable={!meme?.upvoted?.includes(`${session?.user?.id}`)}
+            ></MemeCard>
+          </>
+        ))}
       {loading && (
         <>
           <CardSkeleton />
@@ -62,18 +123,6 @@ const MemesContainer = (props: Props) => {
           <CardSkeleton />
         </>
       )}
-
-      {!loading &&
-        memes.map((meme: Meme) => (
-          <>
-            <MemeCard
-              upvote={upvote}
-              key={meme.id}
-              meme={meme}
-              upvotable={!meme.upvoted.includes(`${session?.user?.id}`)}
-            ></MemeCard>
-          </>
-        ))}
     </div>
   );
 };

@@ -1,4 +1,3 @@
-
 import { ImageResponse } from "next/og";
 import { type NextRequest } from "next/server";
 // App router includes @vercel/og.
@@ -8,35 +7,48 @@ export const runtime = "edge";
 
 export async function GET(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
-  const id = searchParams.get("id");
+  const text = searchParams.get("text");
 
   return new ImageResponse(
     (
       <div
         style={{
-          fontSize: 40,
-          color: "black",
-          background: "white",
-          width: "100%",
           height: "100%",
-          padding: "50px 200px",
-          textAlign: "center",
-          justifyContent: "between",
-          alignItems: "center",
+          width: "100%",
           display: "flex",
+          textAlign: "center",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+          flexWrap: "nowrap",
+          backgroundColor: "white",
+          backgroundImage:
+            "radial-gradient(circle at 25px 25px, lightgray 2%, transparent 0%), radial-gradient(circle at 75px 75px, lightgray 2%, transparent 0%)",
+          backgroundSize: "100px 100px",
         }}
       >
         <div
           style={{
-            width: "600px",
-            height: "600px",
-            borderRadius: "10px",
-            marginBottom: "10px",
-            objectFit: "contain",
-            background: `url(https://memes-cdn.rajaryan.work/uploads/${id}.webp)`,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}
-        ></div>
-        Imagine Memes. MemeExplains
+        >
+          <b>Meme Explains - Get actually funny AI memes</b>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            fontSize: 40,
+            fontStyle: "normal",
+            color: "black",
+            marginTop: 30,
+            lineHeight: 1.8,
+            whiteSpace: "pre-wrap",
+          }}
+        >
+          <b>{text && text}</b>
+        </div>
       </div>
     ),
     {
