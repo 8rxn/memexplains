@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/db";
+
 import { ImageResponse } from "next/og";
 import { type NextRequest } from "next/server";
 // App router includes @vercel/og.

@@ -9,6 +9,14 @@ import { useRouter } from "next/navigation";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { CreditsContext } from "./credits-provider";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const PromptInput = () => {
   const [prompt, setPrompt] = useState<string>("");
@@ -82,6 +90,7 @@ const PromptInput = () => {
           }}
           onChange={(e) => setPrompt(e.target.value)}
         />
+        
         <Button
           className="absolute right-2 bottom-2 w-9 h-6 "
           type="submit"
