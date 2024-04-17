@@ -52,8 +52,8 @@ const Hero = () => {
           ,{" "}
           <span className="dark:bg-green-500/10 bg-green-500/30 p-2 rounded-lg hover:bg-green-500/50 dark:hover:bg-green-500/50 max-h-fit transition-colors ease-in cursor-pointer relative group">
             <span className="peer break-keep">Historical Figures</span>
-            <TooltipCard src="https://memes-cdn.rajaryan.work/uploads/40-the-ugly-apple-airpods-max.webp">
-            The ugly apple airpods max
+            <TooltipCard src="https://memes-cdn.rajaryan.work/uploads/49-Albert-Einstein.webp">
+              Albert Einstein
             </TooltipCard>
           </span>{" "}
           as memes using GPT-4 and Dalle3

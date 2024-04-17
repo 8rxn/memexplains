@@ -19,6 +19,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import Link from "next/link";
 
 const PromptInput = () => {
   const [prompt, setPrompt] = useState<string>("");
@@ -77,7 +78,11 @@ const PromptInput = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto mt-12 bg-neutral-800 rounded-lg text-neutral-100 dark:bg-neutral-900 dark:text-neutral-100 ">
+    <div
+      className={`max-w-xl mx-auto mt-12 bg-neutral-800 rounded-lg text-neutral-100 dark:bg-neutral-900 dark:text-neutral-100 ${
+        meme && "pb-1"
+      } `}
+    >
       <Dialog>
         <div className=" flex items-end  w-full relative">
           <Textarea
@@ -151,14 +156,23 @@ const PromptInput = () => {
           </div>
         )}
         {meme && (
-          <div className="bg-neutral-50 dark:bg-neutral-900 border z-20 flex items-center mx-auto dark:border-neutral-800 border-neutral-300  rounded-lg w-fit my-2 text-gray-950 dark:text-gray-50">
+          <div className="bg-neutral-50 dark:bg-neutral-900 border z-20 flex items-center mx-auto dark:border-neutral-800 border-neutral-300  rounded-lg w-fit my-2 text-gray-950 dark:text-gray-50 p-2 mb-2">
             <img
               alt="Meme"
               className="rounded-md "
-              width={256}
+              width={300}
+              height={300}
               src={meme?.image}
             ></img>
-            <span className="text-xs mt-4 px-2 font-mono">{meme?.prompt}</span>
+            <span className="text-xs mt-4 px-2 font-mono">
+              {meme?.prompt || "Your Awesome Meme Prompt"}
+              <br />
+              <Link href={meme?.id} className="self-end" target="_blank">
+                <Button className="" variant={"ghost"}>
+                  Share on {`𝕏`}
+                </Button>
+              </Link>
+            </span>
           </div>
         )}
 
