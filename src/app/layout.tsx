@@ -5,19 +5,20 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Memexplains",
+  title: "Memexplains - Get Actually Funny AI Memes",
   description: "Your AI Meme Maker",
   metadataBase: new URL("https://memexplains.vercel.app"),
   twitter: {
     site: "@rajxryan",
     card: "summary_large_image",
+    images: ["/api/og?text=Get%20Actually%20Funny%20AI%20Memes"],
   },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://memexplains.vercel.app",
     siteName: "Memexplains",
-    images: [],
+    images: ["/api/og?text=Get%20Actually%20Funny%20AI%20Memes"],
   },
 };
 
