@@ -1,7 +1,6 @@
 import { auth } from "@/auth";
 import Credits from "@/components/credits";
 import DashMemes from "@/components/dash-memes";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { prisma } from "@/lib/db";
 import { redirect } from "next/navigation";
@@ -43,7 +42,7 @@ const Page = async (props: Props) => {
             <Input
               disabled
               className="w-[340px] transparent disabled:text-neutral-950 disabled:dark:text-neutral-50"
-              // @ts-ignore
+              // @ts-ignore2
               value={session?.user?.apiKey}
             ></Input>
           </div>

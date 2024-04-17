@@ -2,6 +2,7 @@ import { auth } from "@/auth";
 import { Button } from "@/components/ui/button";
 import UpvoteButton from "@/components/upvote-button";
 import { prisma } from "@/lib/db";
+import { Download } from "lucide-react";
 import { ResolvingMetadata, Metadata } from "next";
 import Link from "next/link";
 import React from "react";
@@ -94,7 +95,16 @@ const Page = async (props: Props) => {
           }
         />
       )}
-      <div>
+      <div className="absolute bottom-2 sm:top-2 sm:right-2">
+        <Link
+          href={meme.image}
+          download={meme.image.split("/").pop()}
+          target="_blank"
+        >
+          <Button className="" variant={"link"}>
+            Download <Download className="w-4 h-4 ml-2" />
+          </Button>
+        </Link>
         <Link
           href={
             "https://twitter.com/intent/tweet?text=Loved%20this%20meme%20by%20memexplains%0A%0ACheckout%20https%3A%2F%2Fmemexplains.vercel.app%2Fmeme%3Fid%3D" +
@@ -102,7 +112,7 @@ const Page = async (props: Props) => {
           }
           target="_blank"
         >
-          <Button className="absolute top-2 right-2" variant={"link"}>
+          <Button className="" variant={"link"}>
             Share on {`𝕏`}
           </Button>
         </Link>

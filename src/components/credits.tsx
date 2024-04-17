@@ -25,7 +25,6 @@ const Credits = (props: Props) => {
   const [amount, setAmount] = useState(2);
 
   const formAction = async (data: FormData): Promise<void> => {
-    console.log("went");
     const { url } = await createCheckoutSession({
       amount: amount.toString(),
     });

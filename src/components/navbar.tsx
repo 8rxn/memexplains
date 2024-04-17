@@ -3,6 +3,7 @@ import { auth } from "@/auth";
 import { SignIn } from "./sign-in-button";
 import ProfileButton from "./profile-button";
 import Link from "next/link";
+import { Button } from "./ui/button";
 
 type Props = {};
 
@@ -28,7 +29,11 @@ const Navbar = async (props: Props) => {
                 id={session.user?.id || ""}
               />
             ) : (
-              <SignIn>Join in</SignIn>
+              <Link href={"/auth/signin"}>
+                <Button variant="outline" >
+                  Sign in
+                </Button>
+              </Link>
             )}
           </div>
         </div>

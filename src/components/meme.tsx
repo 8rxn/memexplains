@@ -7,7 +7,6 @@ import Image from "next/image";
 import { Skeleton } from "./ui/skeleton";
 import Link from "next/link";
 
-type Props = {};
 
 const MemeCard = ({
   meme,
