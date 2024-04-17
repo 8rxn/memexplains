@@ -6,19 +6,20 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "MemeXplains - Get Actually Funny AI Memes",
-  description: "Your AI Meme Maker",
+  description:
+    "Make actually good Memes using AI. Explain Situations, Events, Historical Figures or anything as memes using GPT-4 and Dalle3",
   metadataBase: new URL("https://memexplains.vercel.app"),
   twitter: {
     site: "@rajxryan",
     card: "summary_large_image",
-    images: ["/api/og?text=Get%20Actually%20Funny%20AI%20Memes"],
+    images: ["/api/og?text=Maybe%20Funny%20AI%20Memes%20👾"],
   },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://memexplains.vercel.app",
     siteName: "MemeXplains",
-    images: ["/api/og?text=Get%20Actually%20Funny%20AI%20Memes"],
+    images: ["/api/og?text=Maybe%20Funny%20AI%20Memes%20👾"],
   },
 };
 
