@@ -22,6 +22,7 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { DialogHeader } from "./ui/dialog";
+import Link from "next/link";
 
 const ProfileButton = ({
   image,
@@ -53,7 +54,9 @@ const ProfileButton = ({
           </DialogTrigger>
 
           <DropdownMenuSeparator></DropdownMenuSeparator>
-          <DropdownMenuItem>Dashboard</DropdownMenuItem>
+          <Link href="/dashboard">
+            <DropdownMenuItem>Dashboard</DropdownMenuItem>
+          </Link>
           <DropdownMenuItem
             onClick={() => {
               signOut();
@@ -72,18 +75,18 @@ const ProfileButton = ({
             Alternatively, you can buy more credits.
           </DialogDescription>
         </DialogHeader>
-      <DialogFooter className="sm:justify-between flex w-full">
-        <DialogClose asChild>
-          <Button type="button" variant="default">
-            Purchase Credits
-          </Button>
-        </DialogClose>
-        <DialogClose asChild>
-          <Button type="button" variant="secondary">
-            Share X
-          </Button>
-        </DialogClose>
-      </DialogFooter>
+        <DialogFooter className="sm:justify-between flex w-full">
+          <DialogClose asChild>
+            <Button type="button" variant="default">
+              Purchase Credits
+            </Button>
+          </DialogClose>
+          <DialogClose asChild>
+            <Button type="button" variant="secondary">
+              Share X
+            </Button>
+          </DialogClose>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

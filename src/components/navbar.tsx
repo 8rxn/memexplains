@@ -2,6 +2,7 @@ import { ModeToggle } from "@/components/theme-toggle";
 import { auth } from "@/auth";
 import { SignIn } from "./sign-in-button";
 import ProfileButton from "./profile-button";
+import Link from "next/link";
 
 type Props = {};
 
@@ -13,7 +14,9 @@ const Navbar = async (props: Props) => {
   return (
     <nav className=" top-0 font-mono absolute w-full ">
       <div className="max-w-7xl mx-auto p-8 flex justify-between">
-        <p>mexplains</p>
+        <Link href="/#">
+          <p>mexplains</p>
+        </Link>
         <div className="flex gap-2">
           <ModeToggle></ModeToggle>
           <div>
@@ -22,7 +25,7 @@ const Navbar = async (props: Props) => {
                 //@ts-ignore
                 credits={session.user?.credits || ""}
                 image={session.user?.image || ""}
-                id = {session.user?.id || ""}
+                id={session.user?.id || ""}
               />
             ) : (
               <SignIn>Join in</SignIn>

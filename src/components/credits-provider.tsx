@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { createContext, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
@@ -19,6 +19,7 @@ export const CreditsProvider = ({
 
   const { data: session } = useSession();
 
+
   const fetchCredits = async () => {
     const res = await fetch("/api/user/credits", {
       method: "POST",
@@ -32,7 +33,7 @@ export const CreditsProvider = ({
 
   useEffect(() => {
     fetchCredits();
-  }, []);
+  }, [session]);
 
   return (
     <CreditsContext.Provider value={{ creditCount, setCreditCount }}>
