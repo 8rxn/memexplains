@@ -156,7 +156,7 @@ const PromptInput = () => {
           </div>
         )}
         {meme && (
-          <div className="bg-neutral-50 dark:bg-neutral-900 border z-20 flex items-center mx-auto dark:border-neutral-800 border-neutral-300  rounded-lg w-fit my-2 text-gray-950 dark:text-gray-50 p-2 mb-2">
+          <div className="bg-neutral-50 dark:bg-neutral-900 border z-20 flex flex-col sm:flex-row items-center mx-auto dark:border-neutral-800 border-neutral-300  rounded-lg w-fit my-2 text-gray-950 dark:text-gray-50 p-2 mb-2">
             <img
               alt="Meme"
               className="rounded-md "
