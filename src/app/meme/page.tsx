@@ -107,8 +107,9 @@ const Page = async (props: Props) => {
         </Link>
         <Link
           href={
-            "https://twitter.com/intent/tweet?text=Loved%20this%20meme%20by%20memexplains%0A%0ACheckout%20https%3A%2F%2Fmemexplains.vercel.app%2Fmeme%3Fid%3D" +
-            meme.id
+            "https://twitter.com/intent/tweet?text=Loved%20this%20meme%20by%20memexplains%0A%0ACheckout%0Ahttps%3A%2F%2Fmemexplains.vercel.app%2Fmeme%3Fid%3D" +
+            meme.id +
+            "%0A"
           }
           target="_blank"
         >

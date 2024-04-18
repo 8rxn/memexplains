@@ -167,7 +167,15 @@ const PromptInput = () => {
             <span className="text-xs mt-4 px-2 font-mono">
               {meme?.prompt || "Your Awesome Meme Prompt"}
               <br />
-              <Link href={meme?.id} className="self-end" target="_blank">
+              <Link
+                href={
+                  "https://twitter.com/intent/tweet?text=Loved%20this%20meme%20by%20memexplains%0A%0ACheckout%0Ahttps%3A%2F%2Fmemexplains.vercel.app%2Fmeme%3Fid%3D" +
+                  meme.id +
+                  "%0A"
+                }
+                className="self-end"
+                target="_blank"
+              >
                 <Button className="" variant={"ghost"}>
                   Share on {`𝕏`}
                 </Button>
