@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
 import { CreditsContext } from "./credits-provider";
+import ApiKeyDialog from "./apikey-dialog";
 import {
   Dialog,
   DialogClose,
@@ -27,25 +28,29 @@ const PromptInput = () => {
   const { creditCount, setCreditCount } = useContext(CreditsContext);
 
   const { status, data } = useSession();
-
-  const router = useRouter();
   const [meme, setMeme] = useState<any>();
 
   const createMeme = async () => {
-    if (status !== "authenticated") {
-      router.push("/auth/signin");
-      return;
-    }
+    console.log({ creditCount });
+
     if (!prompt) {
       return;
     }
 
-    if (creditCount < 1) {
+    if (creditCount == 0 && status !== "authenticated") {
       return;
     }
 
+    let key = "";
+
+    if (status !== "authenticated") {
+      key = `${localStorage.getItem("x-api-key")}`;
+    } else {
+      //@ts-ignore
+      key = data.user?.apiKey;
+    }
     //@ts-ignore
-    if (!data.user?.apiKey) {
+    if (!key) {
       return;
     }
 
@@ -56,7 +61,7 @@ const PromptInput = () => {
       method: "POST",
       headers: {
         //@ts-ignore
-        "x-api-key": data?.user.apiKey,
+        "x-api-key": key,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ text: prompt }),
@@ -101,9 +106,60 @@ const PromptInput = () => {
             onChange={(e) => setPrompt(e.target.value)}
           />
 
-          {creditCount < 1 && (
-            <DialogTrigger id="prompt-submit" asChild>
+          {creditCount == 0 && (
+            <>
+              <DialogTrigger id="prompt-submit" asChild>
+                <Button
+                  className="absolute right-2 bottom-2 w-9 h-6 "
+                  type="submit"
+                  disabled={loading}
+                  onClick={createMeme}
+                >
+                  {loading ? (
+                    <span>
+                      <Loader2 className="w-6 h-6 animate-spin"></Loader2>
+                    </span>
+                  ) : (
+                    <span className="text-neutral-100">
+                      <ArrowUpRight />
+                    </span>
+                  )}
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>You are Out of Credits! </DialogTitle>
+                  <DialogDescription>
+                    To continue using MemeXplains, purchase more credits.
+                    <br />
+                    This will allow me to keep building apps like this
+                  </DialogDescription>
+                </DialogHeader>
+                <DialogFooter className="sm:justify-between flex w-full">
+                  <DialogClose asChild>
+                    <Button type="button" variant="default">
+                      Purchase Credits
+                    </Button>
+                  </DialogClose>
+                  <DialogClose asChild>
+                    <Button type="button" variant="secondary">
+                      Share
+                    </Button>
+                  </DialogClose>
+                </DialogFooter>
+              </DialogContent>
+            </>
+          )}
+          {creditCount == -1 && status !== "authenticated" && (
+            <>
+              <ApiKeyDialog loading={loading}></ApiKeyDialog>
+            </>
+          )}
+
+          {creditCount >= 1 ||
+            (localStorage.getItem("x-api-key") && (
               <Button
+                id="prompt-submit"
                 className="absolute right-2 bottom-2 w-9 h-6 "
                 type="submit"
                 disabled={loading}
@@ -119,28 +175,7 @@ const PromptInput = () => {
                   </span>
                 )}
               </Button>
-            </DialogTrigger>
-          )}
-
-          {creditCount >= 1 && (
-            <Button
-              id="prompt-submit"
-              className="absolute right-2 bottom-2 w-9 h-6 "
-              type="submit"
-              disabled={loading}
-              onClick={createMeme}
-            >
-              {loading ? (
-                <span>
-                  <Loader2 className="w-6 h-6 animate-spin"></Loader2>
-                </span>
-              ) : (
-                <span className="text-neutral-100">
-                  <ArrowUpRight />
-                </span>
-              )}
-            </Button>
-          )}
+            ))}
         </div>
         {loading && (
           <div className="relative text-xs w-fit mx-auto lg:text-sm my-2 ">
@@ -183,29 +218,6 @@ const PromptInput = () => {
             </span>
           </div>
         )}
-
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>You are Out of Credits! </DialogTitle>
-            <DialogDescription>
-              To continue using MemeXplains, purchase more credits.
-              <br />
-              This will allow me to keep building apps like this
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter className="sm:justify-between flex w-full">
-            <DialogClose asChild>
-              <Button type="button" variant="default">
-                Purchase Credits
-              </Button>
-            </DialogClose>
-            <DialogClose asChild>
-              <Button type="button" variant="secondary">
-                Share
-              </Button>
-            </DialogClose>
-          </DialogFooter>
-        </DialogContent>
       </Dialog>
     </div>
   );

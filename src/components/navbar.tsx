@@ -7,8 +7,6 @@ import { Button } from "./ui/button";
 
 type Props = {};
 
-const NavRoutes = [{ title: "Create", path: "/create" }];
-
 const Navbar = async (props: Props) => {
   const session = await auth();
 

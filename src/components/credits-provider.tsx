@@ -15,25 +15,39 @@ export const CreditsProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [creditCount, setCreditCount] = useState<number>(0);
+  const [creditCount, setCreditCount] = useState<number>(-1);
 
   const { data: session } = useSession();
 
+  if (!session) {
+    () => {
+      setCreditCount(-1);
+    };
+  }
 
   const fetchCredits = async () => {
-    const res = await fetch("/api/user/credits", {
-      method: "POST",
-      body: JSON.stringify({ id: session?.user?.id }),
-    });
+    try {
+      console.log({ session });
 
-    const data = await res.json();
+      const res = await fetch("/api/user/credits", {
+        method: "POST",
+        body: JSON.stringify({ id: session?.user?.id }),
+      });
 
-    setCreditCount(data.credits);
+      const data = await res.json();
+      setCreditCount(data.credits);
+    } catch (error) {
+      setCreditCount(-1);
+    }
   };
 
   useEffect(() => {
     fetchCredits();
   }, [session]);
+
+  useEffect(() => {
+    console.log(creditCount);
+  }, [creditCount]);
 
   return (
     <CreditsContext.Provider value={{ creditCount, setCreditCount }}>
