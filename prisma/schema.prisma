@@ -23,7 +23,7 @@ model User {
   updatedAt     DateTime   @updatedAt
   Memes         Memes[]
   Upvotes       Upvotes[]
-  Payments      Payments[]
+  // Payments      Payments[]
 }
 
 model Usage {
@@ -95,12 +95,12 @@ model Upvotes {
   updatedAt DateTime @updatedAt
 }
 
-model Payments {
-  id        Int      @id @default(autoincrement())
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
-  amount    Int
-  completed Boolean
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
+// model Payments {
+//   id        Int      @id @default(autoincrement())
+//   userId    String
+//   user      User     @relation(fields: [userId], references: [id])
+//   amount    Int
+//   completed Boolean
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+// }

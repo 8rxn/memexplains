@@ -27,6 +27,7 @@ const PromptInput = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const { creditCount, setCreditCount } = useContext(CreditsContext);
 
+  console.log(creditCount);
   const { status, data } = useSession();
   const [meme, setMeme] = useState<any>();
 
@@ -156,26 +157,26 @@ const PromptInput = () => {
             </>
           )}
 
-          {creditCount >= 1 ||
-            (localStorage.getItem("x-api-key") && (
-              <Button
-                id="prompt-submit"
-                className="absolute right-2 bottom-2 w-9 h-6 "
-                type="submit"
-                disabled={loading}
-                onClick={createMeme}
-              >
-                {loading ? (
-                  <span>
-                    <Loader2 className="w-6 h-6 animate-spin"></Loader2>
-                  </span>
-                ) : (
-                  <span className="text-neutral-100">
-                    <ArrowUpRight />
-                  </span>
-                )}
-              </Button>
-            ))}
+          {(creditCount >= 1 ||
+            localStorage.getItem("x-api-key"))  && (
+            <Button
+              id="prompt-submit"
+              className="absolute right-2 bottom-2 w-9 h-6 "
+              type="submit"
+              disabled={loading}
+              onClick={createMeme}
+            >
+              {loading ? (
+                <span>
+                  <Loader2 className="w-6 h-6 animate-spin"></Loader2>
+                </span>
+              ) : (
+                <span className="text-neutral-100">
+                  <ArrowUpRight />
+                </span>
+              )}
+            </Button>
+          )}
         </div>
         {loading && (
           <div className="relative text-xs w-fit mx-auto lg:text-sm my-2 ">
