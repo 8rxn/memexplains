@@ -86,3 +86,7 @@
   0%, 66.666%, 100% { opacity: 0; }
   70%, 95% { opacity: 1; }
 }
+
+*{
+  scroll-behavior: smooth !important;
+}

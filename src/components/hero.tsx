@@ -6,6 +6,8 @@ import Image from "next/image";
 import { BackgroundBeams } from "./background-beams";
 import { Button } from "./ui/button";
 import PromptInput from "./prompt-input";
+import Link from "next/link";
+import { AlertCircleIcon } from "lucide-react";
 
 const Hero = () => {
   return (
@@ -58,10 +60,24 @@ const Hero = () => {
           </span>{" "}
           as memes using GPT-4 and Dalle3
         </p>
-        <p className="font-mono text-xs mt-4">
-          The generational server is currently facing issues. Checkout the
-          previous results below with the prompt used
-        </p>
+        <div className="space-y-4 p-4">
+          <p className="font-mono text-xs ">
+            The generational server is currently facing issues. Checkout the{" "}
+            <Link href="#memes" className="underline underline-offset-4">
+              previous results below
+            </Link>{" "}
+            with the prompt used
+          </p>
+          <p className="font-mono text-xs ">
+            To understand how it works,{" "}
+            <Link className="underline underline-offset-4 " href="/demo">
+              Checkout Demo
+            </Link>{" "}
+            <span className="h-4 w-4">
+              <AlertCircleIcon className="h-4 w-4 text-red-600 inline animate-spin" />
+            </span>
+          </p>
+        </div>
         <PromptInput />
       </motion.div>
 

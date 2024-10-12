@@ -95,9 +95,10 @@ const MemesContainer = (props: Props) => {
     <div
       ref={ref}
       className="grid grid-flow-row grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 px-2"
+      id="memes"
     >
       <div className="col-span-full px-6 my-2">
-        <h2 className="font-semibold text-sm sm:text-xl lg:text-2xl ">
+        <h2 className="font-semibold text-sm sm:text-xl lg:text-2xl " >
           Top AI Memes from the Community{" "}
         </h2>
       </div>
