@@ -108,11 +108,11 @@ const PromptInput = () => {
 
           {creditCount == 0 && (
             <>
-              <DialogTrigger id="prompt-submit" asChild>
+              <DialogTrigger id="prompt-submit" asChild disabled>
                 <Button
                   className="absolute right-2 bottom-2 w-9 h-6 "
                   type="submit"
-                  disabled={loading}
+                  disabled={true}
                   onClick={createMeme}
                 >
                   {loading ? (
@@ -162,7 +162,7 @@ const PromptInput = () => {
               id="prompt-submit"
               className="absolute right-2 bottom-2 w-9 h-6 "
               type="submit"
-              disabled={loading}
+              disabled={true}
               onClick={createMeme}
             >
               {loading ? (

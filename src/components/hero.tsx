@@ -58,6 +58,10 @@ const Hero = () => {
           </span>{" "}
           as memes using GPT-4 and Dalle3
         </p>
+        <p className="font-mono text-xs mt-4">
+          The generational server is currently facing issues. Checkout the
+          previous results below with the prompt used
+        </p>
         <PromptInput />
       </motion.div>
 
