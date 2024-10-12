@@ -5,7 +5,6 @@ import { useSession } from "next-auth/react";
 
 import { ArrowUpRight, Loader2 } from "lucide-react";
 
-import { useRouter } from "next/navigation";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
 import { CreditsContext } from "./credits-provider";
@@ -41,7 +40,7 @@ const PromptInput = () => {
     if (creditCount == 0 && status !== "authenticated") {
       return;
     }
-
+    
     let key = "";
 
     if (status !== "authenticated") {
@@ -96,7 +95,7 @@ const PromptInput = () => {
             cols={1}
             className="px-4 bg-transparent py-2 focus:outline-none transition-colors ease-in disabled:cursor-not-allowed disabled:opacity-50"
             value={prompt}
-            disabled={loading}
+            disabled={true}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 const btn = document.querySelector("#prompt-submit");
