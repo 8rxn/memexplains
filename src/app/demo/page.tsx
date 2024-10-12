@@ -51,9 +51,9 @@ const MemeGeneratorFlow: React.FC<MemeGeneratorFlowProps> = ({ steps }) => {
         How Our Meme Generator Works
       </h1>
       <p className="text-xs my-2">
-        <strong>P.S.</strong>This explains the standard flow when user's api key is not provided. In
+        <strong>P.S.</strong>This explains the standard flow when user&apos;s api key is not provided. In
         case that is provided,{"\n"}
-        We use the user's credits to generate the meme.
+        We use the user&apos;s credits to generate the meme.
       </p>
       <div className="space-y-6">
         {steps.map((step, index) => (
@@ -92,7 +92,7 @@ const stepsData: StepData[] = [
     icon: TextIcon,
     title: "2. OpenAI Prompt Generation",
     description:
-      "Uses GPT-4 to create a meme concept based on the user's input.",
+      "Uses GPT-4 to create a meme concept based on the user&apos;s input.",
     extraContent: (
       <>
         <p>
